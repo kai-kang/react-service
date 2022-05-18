@@ -4,11 +4,9 @@ import com.szjt.reactservice.domain.User;
 import com.szjt.reactservice.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -30,8 +28,10 @@ public class UserController {
     //@RequestMapping("/findUserAll")
     @GetMapping("findUserAll")
     public String findUserAll(){
+        System.out.println("数据查询。。。。。。。。。");
         List<User> users = new ArrayList<>();
         users = userService.findUserAll();
-        return users.get(1).toString();
+        System.out.println("查询结束===========================");
+        return users.get(0).toString();
     }
 }
