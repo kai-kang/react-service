@@ -10,7 +10,8 @@ spring:
     password: 12345
     #driver-class-name: com.mysql.jdbc.Driver
     driver-class-name: com.mysql.cj.jdbc.Driver
-
+#解决springboot 和swagger 版本高低问题，这个问题的主要原因确实是SpringBoot版本过高导致。如果你用的是SpringBoot2.5.x及之前版本是没有问题的。
+#Spring Boot 2.6.X使用PathPatternMatcher匹配路径，Swagger引用的Springfox使用的路径匹配是基于AntPathMatcher的
   mvc:
     pathmatch:
       matching-strategy: ANT_PATH_MATCHER
