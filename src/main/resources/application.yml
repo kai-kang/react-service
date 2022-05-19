@@ -1,13 +1,19 @@
 server:
   port: 9080
+  servlet:
+    context-path: /react-service #配置项目名称
 spring:
   datasource:
     name: test
-    url: jdbc:mysql://localhost:3306/test
+    url: jdbc:mysql://localhost:3306/test?serverTimezone=GMT%2B8
     username: root
     password: 12345
-    driver-class-name: com.mysql.jdbc.Driver
+    #driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
 #SpringBoot整合Mybatis配置
 mybatis:
   type-aliases-package: com.szjt.reactservice

@@ -7,26 +7,21 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
 @RequestMapping("/user")
-@Api(value = "desc of class")
+@Api(value = "API - UserController",description = "用户模块接口详情")
 @RestController
 public class UserController {
 
     @Autowired
     UserService userService;
-    /* 方法注解 */
-    /*@ApiOperation(value = "desc of method", notes = "")
-    @GetMapping(value="/hello")
-    public Object hello( *//* 参数注解 *//* @ApiParam(value = "desc of param" , required=true ) @RequestParam String name) {
-        return "Hello " + name + "!";
-    }*/
-    @ApiOperation(value = "findUserAll")
-    //@RequestMapping("/findUserAll")
-    @GetMapping("findUserAll")
+
+    @ApiOperation(value = "测试user用户数据")
+    @RequestMapping(value = "/findUserAll",method = RequestMethod.GET)
     public String findUserAll(){
         System.out.println("数据查询。。。。。。。。。");
         List<User> users = new ArrayList<>();

@@ -1,5 +1,7 @@
 package com.szjt.reactservice.domain;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 
 public class User implements Serializable {
@@ -7,7 +9,7 @@ public class User implements Serializable {
     private String id;
 
     private String user;
-
+    @ApiModelProperty(value = "用户名称")
     private String userName;
 
     private String password;

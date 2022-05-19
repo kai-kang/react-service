@@ -1,7 +1,12 @@
 package com.szjt.reactservice.config;
 
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.ResponseEntity;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -11,38 +16,44 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-//@Configuration
-//@EnableSwagger2
-public class SwaggerConfig {
-    /*@Bean
-    public Docket createRestApi(){
-        return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo())
-                .select()
-                .apis(RequestHandlerSelectors.any())
-                .paths(PathSelectors.any()).build();
-    }
+import java.util.ArrayList;
 
-    private ApiInfo apiInfo(){
-        return new ApiInfoBuilder()
-                .title("Kitty API Doc")
-                .description("This is a restful api document of Kitty.")
-                .version("1.0")
-                .build();
-    }*/
+import static com.google.common.base.Predicates.or;
+
+@Configuration
+@EnableSwagger2
+public class SwaggerConfig {
+    public static final Contact CONTACT = new Contact("", "https://blog.csdn.net/ILOVEMYDEAR", "1010501187@qq.com");
+    //注入配置文件中的项目名称
+    @Value("${server.servlet.context-path}")
+    private String contextPath;
+
     @Bean
-    public Docket createRestApi() {
+    public Docket docket() {
+        // 设置要显示swagger的环境
+        // 通过 enable() 接收此参数判断是否要显示
         return new Docket(DocumentationType.SWAGGER_2)
-                .pathMapping("/")
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("com.nvn.controller"))
-                .paths(PathSelectors.any())
-                .build().apiInfo(new ApiInfoBuilder()
-                        .title("SpringBoot整合Swagger")
-                        .description("SpringBoot整合Swagger，详细信息......")
-                        .version("9.0")
-                        .contact(new Contact("啊啊啊啊","blog.csdn.net","aaa@gmail.com"))
-                        .license("The Apache License")
-                        .licenseUrl("http://www.baidu.com")
-                        .build());
+                .apiInfo(apiInfo())
+        // .enable(false)   // 配置是否启用Swagger，如果是false，在浏览器将无法访问
+        .select()   // 通过.select()方法，去配置扫描接口,RequestHandlerSelectors配置如何扫描接口
+        //.apis(RequestHandlerSelectors.basePackage("com.szjt.reactservice"))   //配置你想在那个controller层生产接口文档
+        //.paths(PathSelectors.ant("/search/**"))   // 配置如何通过path过滤,即这里只扫描请求以/kuang开头的接口
+        //不显示错误的接口地址
+        .paths(Predicates.not(PathSelectors.regex("/error.*")))//错误路径不监控
+        .build();
     }
+    //配置文档信息
+    private ApiInfo apiInfo() {
+        Contact CONTACT = new Contact("kangk", "https:/123456789", "1010501187@qq.com");
+        return new ApiInfo(
+                "User",// 标题
+                "用户模块测试API",// 描述
+                "v1.0",// 版本
+                "https://blog.csdn.net/ILOVEMYDEAR",// 组织链接
+                CONTACT,// 联系人信息
+                "Apach 2.0 许可",// 许可
+                "许可链接",// 许可连接
+                new ArrayList<>()// 扩展
+                );    }
+
 }
