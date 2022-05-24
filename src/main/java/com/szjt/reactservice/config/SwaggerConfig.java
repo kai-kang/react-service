@@ -1,15 +1,10 @@
 package com.szjt.reactservice.config;
 
-import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.ResponseEntity;
-import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
@@ -18,15 +13,14 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.ArrayList;
 
-import static com.google.common.base.Predicates.or;
 
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
-    public static final Contact CONTACT = new Contact("", "https://blog.csdn.net/ILOVEMYDEAR", "1010501187@qq.com");
+    //public static final Contact CONTACT = new Contact("", "https://blog.csdn.net/ILOVEMYDEAR", "1010501187@qq.com");
     //注入配置文件中的项目名称
-    @Value("${server.servlet.context-path}")
-    private String contextPath;
+    //@Value("${server.servlet.context-path}")
+    //private String contextPath;
 
     @Bean
     public Docket docket() {

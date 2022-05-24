@@ -3,21 +3,28 @@
 <mapper namespace="com.szjt.reactservice.dao.UserMapper">
     <resultMap id="userMap" type="com.szjt.reactservice.domain.User">
         <id column="id" jdbcType="VARCHAR" property="id"/>
-        <result column="user" jdbcType="VARCHAR" property="user"/>
-        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="username" jdbcType="VARCHAR" property="userName"/>
         <result column="password" jdbcType="VARCHAR" property="password"/>
-        <result column="phone" jdbcType="VARCHAR" property="phone"/>
-        <result column="create_time" jdbcType="VARCHAR" property="createTime"/>
+        <result column="account" jdbcType="VARCHAR" property="account"/>
     </resultMap>
 
     <select id="findUserAll" resultMap="userMap">
         SELECT
             ID,
-            USER,
-            USER_NAME,
+            USERNAME,
             PASSWORD,
-            PHONE,
-            CREATE_TIME
+            ACCOUNT
         FROM USER
+    </select>
+
+    <sql id="base_column_list">
+        id, account, password, username
+    </sql>
+
+    <select id="findByAccount" parameterType="String" resultType="User">
+        select
+        <include refid="base_column_list"/>
+        from user
+        where account = #{account}
     </select>
 </mapper>

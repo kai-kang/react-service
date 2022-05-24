@@ -6,17 +6,15 @@ import java.io.Serializable;
 
 public class User implements Serializable {
 
+    private static final long serialVersionUID = -407657271794588563L;
     private String id;
 
-    private String user;
     @ApiModelProperty(value = "用户名称")
     private String userName;
 
     private String password;
 
-    private String phone;
-
-    private String createTime;
+    private String account;
 
     public User() {
     }
@@ -27,14 +25,6 @@ public class User implements Serializable {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
     }
 
     public String getUserName() {
@@ -53,31 +43,21 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getAccount() {
+        return account;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(String createTime) {
-        this.createTime = createTime;
+    public void setAccount(String account) {
+        this.account = account;
     }
 
     @Override
     public String toString() {
         return "User{" +
                 "id='" + id + '\'' +
-                ", user='" + user + '\'' +
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
-                ", phone='" + phone + '\'' +
-                ", createTime='" + createTime + '\'' +
+                ", account='" + account + '\'' +
                 '}';
     }
 }

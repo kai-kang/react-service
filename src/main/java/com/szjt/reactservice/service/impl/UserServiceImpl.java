@@ -12,10 +12,15 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserMapper userDao;
+    private UserMapper userMapper;
     @Override
     public List<User> findUserAll() {
-        List<User>  userList =userDao.findUserAll();
+        List<User>  userList =userMapper.findUserAll();
         return userList;
+    }
+
+    @Override
+    public User findByAccount(String account) {
+        return userMapper.findByAccount(account);
     }
 }
